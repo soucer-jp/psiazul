@@ -4,13 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Psicóloga {{NOME}}</title>
+  <title>Psicóloga {{NOME_CURTO}}</title>
 
-  <meta name="description" content="Psicoterapia online e presencial para crianças, adolescentes, adultos e idosos">
-  <meta name="author" content="Psicóloga">
-  <meta property="og:title" content="Psicóloga {{NOME}}">
+  <meta name="description" content="{{SUBTITULO_HERO}}">
+  <meta name="author" content="Psicóloga {{NOME_COMPLETO}}">
+  <meta property="og:title" content="Psicóloga {{NOME_CURTO}}">
   <meta property="og:description" content="Psicoterapia online e presencial. Agende sua sessão.">
-  <meta property="og:image" content="assets/foto1.webp">
+  <meta property="og:image" content="{{URL_SITE}}/assets/foto1.webp">
   <meta property="og:image:type" content="image/webp">
   <meta property="og:image:width" content="500">
   <meta property="og:image:height" content="500">
@@ -184,6 +184,65 @@ section > .container > .grid > .lg\:sticky > .bg-white > a {
         transform: translateY(0);
     }
     
+
+    /* --- CORREÇÃO FORÇADA DAS SETAS (Versão Alinhada) --- */
+
+/* 1. Remove a seta feia padrão */
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    display: none !important;
+    content: "" !important; 
+}
+
+/* --- 1. DESIGN (Aplica a aparência redonda, mas NÃO a visibilidade) --- */
+.swiper-button-prev,
+.swiper-button-next {
+    /* Tamanho e Forma */
+    width: 3rem !important;
+    height: 3rem !important;
+    border-radius: 50% !important;
+    background-color: white !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+    
+    /* Reset do Swiper */
+    margin-top: 0 !important;
+    position: absolute !important;
+    z-index: 50 !important;
+    top: 42% !important; /* Ajuste de altura */
+    
+    /* Remove a seta fantasma padrão */
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    display: none !important;
+    content: "" !important; 
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+    transform: scale(1.1);
+    background-color: #ffffff !important;
+}
+
+/* --- 2. VISIBILIDADE (Aqui definimos onde aparece) --- */
+
+/* Padrão: ESCONDIDO no Mobile (Celulares) */
+.swiper-button-prev,
+.swiper-button-next {
+    display: none !important; 
+}
+
+/* A partir de 640px (Tablets e PC): MOSTRAR e Centralizar Ícone */
+@media (min-width: 640px) {
+    .swiper-button-prev,
+    .swiper-button-next {
+        display: flex !important; /* Agora sim, mostra só aqui */
+        align-items: center !important;
+        justify-content: center !important;
+    }
+}
+
   </style>
 
 </head>
@@ -195,7 +254,7 @@ section > .container > .grid > .lg\:sticky > .bg-white > a {
       <div class="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
         <div class="flex items-center justify-between">
           <div class="flex-shrink-0">
-            <h1 class="text-xl sm:text-2xl font-serif font-semibold text-foreground">Psicóloga {{NOME}}</h1>
+            <h1 class="text-xl sm:text-2xl font-serif font-semibold text-foreground">Psicóloga {{NOME_CURTO}}</h1>
           </div>
           <nav class="hidden md:flex items-center space-x-6 lg:space-x-8">
            <a href="#como-funciona" data-scroll-to class="text-muted-foreground hover:text-foreground transition-colors duration-200 font-medium text-sm lg:text-base">Como Funciona</a>
@@ -241,21 +300,21 @@ section > .container > .grid > .lg\:sticky > .bg-white > a {
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center mb-12 sm:mb-16">
             <div class="order-1 lg:order-1 flex justify-center lg:justify-start">
               <div class="w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden shadow-2xl flex-shrink-0 animate-on-scroll">
-                 <img src="assets/foto1.webp" alt="Foto de perfil da Psicóloga "
+                 <img src="assets/foto1.webp" alt="Foto de perfil da Psicóloga {{NOME_COMPLETO}}"
                        class="w-full h-full object-cover">
                  </div>
             </div>
             <div class="order-2 lg:order-2 text-center lg:text-left animate-on-scroll">
               <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-foreground mb-2 sm:mb-3 leading-tight">
-                Psicóloga {{NOME}}</h1>
+                Psicóloga {{NOME_COMPLETO}}</h1>
               
               <p class="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto lg:mx-0 mb-4 sm:mb-6">
                 CRP - {{CRP}}</p>
 
               <p class="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto lg:mx-0 leading-relaxed px-4 lg:px-0">
-                Psicoterapia online e presencial para crianças, adolescentes, adultos e idosos.</p>
+                {{SUBTITULO_HERO}}.</p>
 
-              <a href="https://wa.me/{{WHATSAPP}}" target="_blank" rel="noopener noreferrer" 
+              <a id="botao-primario-mestre" href="https://wa.me/{{WHATSAPP}}" target="_blank" rel="noopener noreferrer" 
                  class="inline-flex items-center justify-center sm:justify-start px-6 sm:px-8 py-3 sm:py-4 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-all duration-200 font-medium text-base sm:text-lg shadow-lg hover:shadow-xl hover-scale mt-6 sm:mt-8 w-full sm:w-auto">
                 
                 <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3" viewBox="0 0 24 24" fill="currentColor">
@@ -270,16 +329,12 @@ section > .container > .grid > .lg\:sticky > .bg-white > a {
           </div>
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto animate-on-scroll">
             <div class="bg-card rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 sm:p-8 hover-scale">
-              <h3 class="text-xl sm:text-2xl font-serif font-semibold text-foreground mb-3 sm:mb-4">Psicoterapia
-                Individual</h3>
-              <p class="text-muted-foreground mb-6 leading-relaxed text-sm sm:text-base">A terapia individual é um espaço seguro
-                onde você pode explorar suas emoções, pensamentos e comportamentos.</p>
+              <h3 class="text-xl sm:text-2xl font-serif font-semibold text-foreground mb-3 sm:mb-4">{{TITULO_SERVICO_1}}</h3>
+              <p class="text-muted-foreground mb-6 leading-relaxed text-sm sm:text-base">{{DESC_SERVICO_1}}</p>
             </div>
             <div class="bg-card rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 sm:p-8 hover-scale">
-              <h3 class="text-xl sm:text-2xl font-serif font-semibold text-foreground mb-3 sm:mb-4">Atendimento Online e
-                Presencial</h3>
-              <p class="text-muted-foreground mb-6 leading-relaxed text-sm sm:text-base">Ofereço sessões de terapia que se
-                adaptam às suas necessidades e à sua rotina, tanto no formato online quanto presencial.
+              <h3 class="text-xl sm:text-2xl font-serif font-semibold text-foreground mb-3 sm:mb-4">{{TITULO_SERVICO_2}}</h3>
+              <p class="text-muted-foreground mb-6 leading-relaxed text-sm sm:text-base">{{DESC_SERVICO_2}}.
             </div>
           </div>
         </div>
@@ -351,7 +406,7 @@ section > .container > .grid > .lg\:sticky > .bg-white > a {
             <div class="order-1 lg:order-2 flex justify-center lg:justify-end mb-8 lg:mb-0">
               <div class="order-1 lg:order-2 flex justify-center lg:justify-end mb-8 lg:mb-0">
                 <div class="w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden shadow-2xl flex-shrink-0"><img
-                   src="assets/foto2.webp" alt="Psicóloga  em seu consultório"
+                   src="assets/foto2.webp" alt="Psicóloga {{NOME_COMPLETO}} em seu consultório"
                        class="w-full h-full object-cover"></div>
                </div>
           </div>
@@ -656,7 +711,7 @@ section > .container > .grid > .lg\:sticky > .bg-white > a {
                 <div class="swiper-slide">
                     <a href="https://www.instagram.com/{{INSTAGRAM}}/" target="_blank" rel="noopener noreferrer">
                     <div class="bg-card rounded-xl sm:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-full">
-                        <div class="aspect-square overflow-hidden rounded-xl sm:rounded-2xl"><img src="assets/carrossel1.webp" alt="Post 1" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"></div>
+                        <div class="aspect-square overflow-hidden rounded-xl sm:rounded-2xl"><img src="assets/carrossel1.webp" alt="Conteúdo do Instagram de {{NOME_CURTO}} - Post 1" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"></div>
                     </div>
                     </a>
                 </div>
@@ -664,7 +719,7 @@ section > .container > .grid > .lg\:sticky > .bg-white > a {
                 <div class="swiper-slide">
                     <a href="https://www.instagram.com/{{INSTAGRAM}}/" target="_blank" rel="noopener noreferrer">
                     <div class="bg-card rounded-xl sm:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-full">
-                        <div class="aspect-square overflow-hidden rounded-xl sm:rounded-2xl"><img src="assets/carrossel2.webp" alt="Post 2" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"></div>
+                        <div class="aspect-square overflow-hidden rounded-xl sm:rounded-2xl"><img src="assets/carrossel2.webp" alt="Conteúdo do Instagram de {{NOME_CURTO}} - Post 2" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"></div>
                     </div>
                     </a>
                 </div>
@@ -672,7 +727,7 @@ section > .container > .grid > .lg\:sticky > .bg-white > a {
                 <div class="swiper-slide">
                     <a href="https://www.instagram.com/{{INSTAGRAM}}/" target="_blank" rel="noopener noreferrer">
                     <div class="bg-card rounded-xl sm:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-full">
-                        <div class="aspect-square overflow-hidden rounded-xl sm:rounded-2xl"><img src="assets/carrossel3.webp" alt="Post 3" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"></div>
+                        <div class="aspect-square overflow-hidden rounded-xl sm:rounded-2xl"><img src="assets/carrossel3.webp" alt="Conteúdo do Instagram de {{NOME_CURTO}} - Post 3" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"></div>
                     </div>
                     </a>
                 </div>
@@ -680,7 +735,7 @@ section > .container > .grid > .lg\:sticky > .bg-white > a {
                 <div class="swiper-slide">
                     <a href="https://www.instagram.com/{{INSTAGRAM}}/" target="_blank" rel="noopener noreferrer">
                     <div class="bg-card rounded-xl sm:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-full">
-                        <div class="aspect-square overflow-hidden rounded-xl sm:rounded-2xl"><img src="assets/carrossel4.webp" alt="Post 4" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"></div>
+                        <div class="aspect-square overflow-hidden rounded-xl sm:rounded-2xl"><img src="assets/carrossel4.webp" alt="Conteúdo do Instagram de {{NOME_CURTO}} - Post 4" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"></div>
                     </div>
                     </a>
                 </div>
@@ -688,7 +743,7 @@ section > .container > .grid > .lg\:sticky > .bg-white > a {
                 <div class="swiper-slide">
                     <a href="https://www.instagram.com/{{INSTAGRAM}}/" target="_blank" rel="noopener noreferrer">
                     <div class="bg-card rounded-xl sm:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-full">
-                        <div class="aspect-square overflow-hidden rounded-xl sm:rounded-2xl"><img src="assets/carrossel5.webp" alt="Post 5" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"></div>
+                        <div class="aspect-square overflow-hidden rounded-xl sm:rounded-2xl"><img src="assets/carrossel5.webp" alt="Conteúdo do Instagram de {{NOME_CURTO}} - Post 5" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"></div>
                     </div>
                     </a>
                 </div>
@@ -696,18 +751,23 @@ section > .container > .grid > .lg\:sticky > .bg-white > a {
                 <div class="swiper-slide">
                     <a href="https://www.instagram.com/{{INSTAGRAM}}/" target="_blank" rel="noopener noreferrer">
                     <div class="bg-card rounded-xl sm:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-full">
-                        <div class="aspect-square overflow-hidden rounded-xl sm:rounded-2xl"><img src="assets/carrossel6.webp" alt="Post 6" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"></div>
+                        <div class="aspect-square overflow-hidden rounded-xl sm:rounded-2xl"><img src="assets/carrossel6.webp" alt="Conteúdo do Instagram de {{NOME_CURTO}} - Post 6" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"></div>
                     </div>
                     </a>
                 </div>
             </div>
             
-            <button class="swiper-button-prev items-center justify-center z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-card/70 backdrop-blur-sm shadow-md hover:bg-card transition-all duration-200 absolute top-1/2 -translate-y-1/2 left-0 sm:left-2 lg:left-4 xl:left-8 -ml-4 sm:-ml-5 lg:-ml-6 flex after:hidden">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 sm:w-6 sm:h-6 text-primary"><polyline points="15 18 9 12 15 6"></polyline></svg>
-            </button>
-            <button class="swiper-button-next items-center justify-center z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-card/70 backdrop-blur-sm shadow-md hover:bg-card transition-all duration-200 absolute top-1/2 -translate-y-1/2 right-0 sm:right-2 lg:right-4 xl:right-8 -mr-4 sm:-mr-5 lg:-mr-6 flex after:hidden">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 sm:w-6 sm:h-6 text-primary"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            </button>
+     <div class="swiper-button-prev text-primary border border-gray-100">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 relative -left-[1px]">
+    <polyline points="15 18 9 12 15 6"></polyline>
+  </svg>
+</div>
+
+<div class="swiper-button-next text-primary border border-gray-100">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 relative -right-[1px]">
+    <polyline points="9 18 15 12 9 6"></polyline>
+  </svg>
+</div>
             
             <div class="swiper-pagination relative flex justify-center mt-4 space-x-2"></div>
             
@@ -737,8 +797,7 @@ section > .container > .grid > .lg\:sticky > .bg-white > a {
         
       <div class="map-container rounded-2xl shadow-xl">
         
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d486.52835753498545!2d-43.18603433029957!3d-12.698610899999993!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x75da9c7221342b3%3A0x25e18250ae8aeb0a!2sPizzaria%20Jata%C3%AD!5e0!3m2!1spt-BR!2sbr!4v1763401326716!5m2!1spt-BR!2sbr" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
+{{IFRAME_MAPA}}      </div>
 </section>
 
     </main>
@@ -749,7 +808,7 @@ section > .container > .grid > .lg\:sticky > .bg-white > a {
           
           
           
-          <p class="text-base sm:text-lg text-primary-foreground">Psicóloga {{NOME}} | CRP {{CRP}}</p>
+          <p class="text-base sm:text-lg text-primary-foreground">Psicóloga {{NOME_CURTO}} | CRP {{CRP}}</p>
         
         </div>
 
@@ -759,7 +818,7 @@ section > .container > .grid > .lg\:sticky > .bg-white > a {
         
         <div class="mt-6 sm:mt-8 text-center">
           
-          <p class="text-primary-foreground text-sm">© 2025 {{NOME}}. Todos os direitos reservados.</p>
+          <p class="text-primary-foreground text-sm">© <span id="ano-atual"></span> {{NOME_COMPLETO}}. Todos os direitos reservados.</p>
         
         </div>
         

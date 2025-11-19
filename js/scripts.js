@@ -39,6 +39,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 menuIconClose.classList.add('hidden');
             });
         });
+
+
+        const anoElement = document.getElementById('ano-atual');
+    if (anoElement) {
+        anoElement.textContent = new Date().getFullYear(); 
+        // Isso sempre vai mostrar o ano "real" (2025, 2026, 2030...)
+    }
+
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -103,12 +111,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Cor dos pontos inativos (do seu tema)
     let inactiveDotColor = 'bg-muted';
 
-    // 1. Encontra o botão "Agende um Horário"
-    document.querySelectorAll('button').forEach(button => {
-        if (button.textContent.includes('Agende um Horário')) {
-            scheduleButton = button;
-        }
-    });
+    // 1. Encontra o elemento mestre pelo ID (Universal)
+    scheduleButton = document.getElementById('botao-primario-mestre');
+
+    // Fallback de segurança: se esquecerem o ID, tenta achar o primeiro elemento com a cor primária
+    if (!scheduleButton) {
+         scheduleButton = document.querySelector('.bg-primary');
+    }
 
     // 2. Extrai a classe de cor de fundo (ex: "bg-caramel-500")
     if (scheduleButton) {
